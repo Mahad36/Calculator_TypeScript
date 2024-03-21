@@ -1,45 +1,48 @@
-#! /usr/bin/env node 
+#!/usr/bin/env node 
 
 import inquirer from "inquirer";
-import chalk from "chalk";
-const answers:{
-    numberOne: number,
-    numberTwo: number,
-    operator:string
 
-}=await inquirer.prompt([
-    {type:"number",
-    name:"numberOne",
-    message:"Enter number One"
+const answers = await inquirer.prompt([
+    {
+        type: "number",
+        name: "number1",
+        message: "Enter number One"
     },
-    {type:"number",
-    name:"numberTwo",
-    message:"Enter number Two"
+    {
+        type: "number",
+        name: "number2",
+        message: "Enter number Two"
     },
-    {type:"list",
-    name:"operator",
-    message:"Choose operator",
-    choices:["+","-","*","/"]
-}
-])
-const{numberOne,numberTwo,operator}=answers;
-let result
+    {
+        type: "list",
+        name: "operator",
+        message: "Choose operator",
+        choices: ["+", "-", "*", "/","%"]
+    }
+]);
+
+const { number1, number2, operator } = answers;
+let answer;
+
 switch (operator) {
     case "+":
-        result=numberOne+numberTwo
+        answer = number1 + number2;
         break;
     case "-":
-        result=numberOne-numberTwo
+        answer = number1 - number2;
         break;
     case "*":
-        result=numberOne*numberTwo
+        answer = number1 * number2;
         break;
     case "/":
-        result=numberOne/numberTwo
+        answer = number1 / number2;
         break;
-
+    case "%":
+        answer = number1 % number2;
+        break;
     default:
-        console.log("Invalid operator")
+        console.log("Enter valid operator");
         break;
 }
-console.log(chalk.yellow(`${numberOne} ${operator} ${numberTwo} = ${result}`));
+
+console.log(`${number1} ${operator} ${number2} = ${answer}`);
